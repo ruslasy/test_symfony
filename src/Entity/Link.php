@@ -19,7 +19,8 @@ class Link
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="long_link", type="string", length=255, unique=true)
+
      */
     private $long_link;
 

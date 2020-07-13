@@ -6,8 +6,16 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
+        {% if redirecrLink is defined %}
+            <meta http-equiv="refresh" content="3;{{ redirecrLink }}">
+        {% endif %}
     </head>
     <body>
+    <header>
+        <div class="header">
+            <h1><a href="/">Сокращение ссылок</a></h1>
+        </div>
+    </header>
         {% block body %}{% endblock %}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}    

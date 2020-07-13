@@ -5,10 +5,14 @@
 {% block body %}
 <div>
     <div class="link">
-        <form method="POST" action="/link">
+        <form id="form-link" method="POST" action="/link">
             <input name="link" type="text" placeholder="Вставьте ссылку">
-            <input type="submit" value="Отправить">
         </form>
+        <button id="add-button">Отправить</button>
+
+    </div>
+    <div class="link-filed">
+        <a href="" id="link-filed"></a>
     </div>
 </div>
 {% endblock %}
