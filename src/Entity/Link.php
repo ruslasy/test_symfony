@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\LinkRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=LinkRepository::class)
@@ -20,7 +21,7 @@ class Link
 
     /**
      * @ORM\Column(name="long_link", type="string", length=255, unique=true)
-
+     * @Assert\Regex("/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,4}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)/")
      */
     private $long_link;
 

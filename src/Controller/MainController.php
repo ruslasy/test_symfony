@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Link;
 use App\Repository\LinkRepository;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MainController extends AbstractController
 {
@@ -26,7 +27,7 @@ class MainController extends AbstractController
     /**
      * @Route("/link", methods={"POST"}, name="generateLink")
      */
-    public function generateLink(Request $request, EntityManagerInterface $entityManager, LinkRepository $linkRepository)
+    public function generateLink(Request $request, EntityManagerInterface $entityManager, LinkRepository $linkRepository, ValidatorInterface $validator)
     {
         $longLink = $request->request->get('link');
 
@@ -38,7 +39,11 @@ class MainController extends AbstractController
             $link->setLongLink($longLink);
             $link->setShortLink(crc32($longLink));
             $link->setCreateDate(new \DateTime());
-    
+
+            if(count($validator->validate($link))){
+                return $this->json(['message' => 'Validation error'], 400);
+            }
+
             $entityManager->persist($link);
             $entityManager->flush();
         }
@@ -55,11 +60,8 @@ class MainController extends AbstractController
     {
         $link = $linkRepository->findOneBy(['short_link' => $link]);
         if($link){
-            $redirecrLink = $this->generateUrl('getLink', [
-                'link' => $link->getLongLink(),
-            ]);
-            return $this->render('link.html.twig',['redirecrLink' => $redirecrLink]);
+            return $this->render('link.html.twig',['redirecrLink' => $link->getLongLink()]);
         }
-        return $this->render('404.html.twig');
+        return new Response($this->renderView('404.html.twig'), 404);
     }
 }
