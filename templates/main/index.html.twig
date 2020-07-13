@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Тестовое задание!{% endblock %}
+
+{% block body %}
+<div>
+    <div class="link">
+        <form method="POST" action="/link">
+            <input name="link" type="text" placeholder="Вставьте ссылку">
+            <input type="submit" value="Отправить">
+        </form>
+    </div>
+</div>
+{% endblock %}

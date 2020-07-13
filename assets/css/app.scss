@@ -1,0 +1,16 @@
+body {
+    background-color: lightgray;
+}
+.link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    margin: auto;
+    border: solid 1px #969696;
+    border-radius: 3px;
+    input{
+        display: flex;
+        margin: 1rem auto;
+    }
+}
