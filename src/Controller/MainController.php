@@ -60,6 +60,6 @@ class MainController extends AbstractController
             ]);
             return $this->render('link.html.twig',['redirecrLink' => $redirecrLink]);
         }
-        return new Response($this->render('404.html.twig'), 404);
+        return $this->render('404.html.twig');
     }
 }
