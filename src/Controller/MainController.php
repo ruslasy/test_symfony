@@ -54,9 +54,9 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/link/{link}", methods={"GET"}, name="getLink")
+     * @Route("/link/{link}", methods={"GET"}, name="getLink", requirements={"link"="\d+"})
      */
-    public function getLink(Request $request, LinkRepository $linkRepository, $link)
+    public function getLink(Request $request, LinkRepository $linkRepository, string $link)
     {
         $link = $linkRepository->findOneBy(['short_link' => $link]);
         if($link){
